@@ -1,21 +1,13 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
-/**
- * Write a description of class MyWorld here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class MyWorld extends World
 {
-
-    /**
-     * Constructor for objects of class MyWorld.
-     * 
-     */
     public MyWorld()
-    {    
-        // aqui é o tamanho do lab
-        super(600, 400, 1); 
+    {
+        super(800, 500, 1);
+
+        GreenfootImage fundo = new GreenfootImage("Background1.png");
+        fundo.scale(800, 500);
+        setBackground(fundo);
     }
 }

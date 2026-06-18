@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=LabirintoFase2
+comment1.params=
+comment1.target=LabirintoFase2()
+comment2.params=
+comment2.target=void\ gerarCenario()
+comment3.params=teseu
+comment3.target=void\ verificarSaida(Teseu)
+comment4.params=teseu
+comment4.target=void\ avancarParaProximaFase(Teseu)
+comment5.params=texto
+comment5.target=void\ mostrarMensagem(java.lang.String)
+numComments=6

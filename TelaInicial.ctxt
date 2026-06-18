@@ -1,6 +1,5 @@
 #BlueJ class context
 comment0.target=TelaInicial
-comment0.text=\r\n\ Tela\ inicial\ do\ Labirinto\ do\ Minotauro.\r\n\ Pressione\ ENTER\ para\ comecar.\r\n
 comment1.params=
 comment1.target=TelaInicial()
 comment2.params=
