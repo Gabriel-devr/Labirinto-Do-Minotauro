@@ -1,8 +1,7 @@
 import greenfoot.*;
 
-/**
- * Classe simples para mostrar textos na tela
- */
+//Classe simples para mostrar textos na tela
+ 
 public class Label extends Actor
 {
     private int tempoVida;

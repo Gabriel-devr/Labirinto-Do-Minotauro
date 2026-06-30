@@ -1,39 +1,36 @@
 import greenfoot.*;
 
-public class TelaInicial extends World
-{
+//Classe Narrativa organiza a narrativa introdutória do jogo.
+
+public class TelaInicial extends World{
+    
+    GreenfootImage fundo = new GreenfootImage("FundoInicio.png");
+    GreenfootSound backgroundMusic = new GreenfootSound("MenuInicial.wav");    
+    
     public TelaInicial()
     {
         super(800, 500, 1);
 
-        GreenfootImage fundo = new GreenfootImage("FundoInicio.png");
         fundo.scale(800, 500);
         setBackground(fundo);
-
+        
+        
         showText("LABIRINTO DO MINOTAURO", 600, 180);
         showText("Pressione ENTER para jogar", 600, 200);
-        
-        try {
-            Greenfoot.playSound("click.wav");
-        } catch(Exception e) {}
-    
         
     }
 
     public void act()
     {
-        if (Greenfoot.isKeyDown("enter")) {
-            Greenfoot.setWorld(new LabirintoFase1());
-        }
+        backgroundMusic.playLoop();
         
-        
-
         if (Greenfoot.isKeyDown("enter")) {
             try {
+                backgroundMusic.stop();
                 Greenfoot.playSound("Return.wav");
             } catch(Exception e) {}
             
-            Greenfoot.setWorld(new LabirintoFase1());
+            Greenfoot.setWorld(new Narrativa());
         
         }
     }

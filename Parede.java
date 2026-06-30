@@ -10,7 +10,7 @@ public class Parede extends Actor
 {
     //COnstrutor da parede, fiz para diminuir o tamanho e não dar problema de colisão
     public Parede() {
-        GreenfootImage imagem = getImage();
+        GreenfootImage imagem = new GreenfootImage("bricks3.jpg");
         imagem.scale(40,40);
         setImage(imagem);
     }

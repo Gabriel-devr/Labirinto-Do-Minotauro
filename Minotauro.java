@@ -1,6 +1,8 @@
 import greenfoot.*;
 
-public class Minotauro extends Personagem
+//Classe que define o Minotauro, obstáculo do jogo.
+
+public class Minotauro extends Actor
 {
     private int velocidade = 1;
     private int direcaoX = 1;
@@ -8,9 +10,9 @@ public class Minotauro extends Personagem
     private int contadorMovimento = 0;
     private int passo = 0;
     
-    public Minotauro() {
-        GreenfootImage imagem = getImage();
-        imagem.scale(35, 35);
+    public Minotauro() { 
+        GreenfootImage imagem = new GreenfootImage("Minotauro.png");
+        imagem.scale(35,35);
         setImage(imagem);
     }
     
@@ -23,7 +25,7 @@ public class Minotauro extends Personagem
         }
     }
     
-    public void mover() {  // <-- ESTE MÉTODO ESTÁ DENTRO DA CLASSE?
+    public void mover() {  //Movimenta o Minotauro no labirinto 
         contadorMovimento++;
         
         if (contadorMovimento > 30) {
@@ -34,7 +36,7 @@ public class Minotauro extends Personagem
         setLocation(getX() + (direcaoX * velocidade), getY() + (direcaoY * velocidade));
     }
     
-    private void mudarDirecao() {
+    private void mudarDirecao() { //Muda a direcão do Minotauro
         int rand = Greenfoot.getRandomNumber(4);
         switch(rand) {
             case 0: direcaoX = 1; direcaoY = 0; break;
@@ -44,7 +46,7 @@ public class Minotauro extends Personagem
         }
     }
     
-    private void verificarColisaoParede() {
+    private void verificarColisaoParede() {//Verifica se o Minotauro está colidindo com a parede
         if (isTouching(Parede.class)) {
             setLocation(getX() - (direcaoX * velocidade), getY() - (direcaoY * velocidade));
             mudarDirecao();

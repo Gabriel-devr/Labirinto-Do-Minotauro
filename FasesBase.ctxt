@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=FasesBase
+comment1.params=largura\ altura\ tamanhoCelula\ imagemFundo\ arquivoMusica
+comment1.target=FasesBase(int,\ int,\ int,\ java.lang.String,\ java.lang.String)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=mapa
+comment3.target=void\ gerarCenario(int[][])
+comment4.params=
+comment4.target=void\ pararMusica()
+comment5.params=proximaFase\ textoMensagem\ arquivoSomTransicao
+comment5.target=void\ avancarParaProximaFase(greenfoot.World,\ java.lang.String,\ java.lang.String)
+comment6.params=texto
+comment6.target=void\ mostrarMensagem(java.lang.String)
+numComments=7

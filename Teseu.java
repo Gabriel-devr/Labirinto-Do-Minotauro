@@ -1,55 +1,68 @@
 import greenfoot.*;
 
-/**
- * Teseu - Personagem principal controlado pelo jogador
- */
-public class Teseu extends Personagem
+//Teseu - Personagem principal controlado pelo jogador
+
+public class Teseu extends Actor
 {
+    private static int vidas = 3; 
     private int velocidade = 1;
-    private boolean tomouDano = false;
-    private int contadorDano = 0;
     
-    public Teseu() 
+    public Teseu() //Personaliza Teseu
     {
-        GreenfootImage imagem = getImage();
+        GreenfootImage imagem = new GreenfootImage("Teseu.png");
         imagem.scale(35, 35);
         setImage(imagem);
     }
     
     public void act()
     {
-        super.act(); // Chama o método da classe pai para invencibilidade
-        checarTeclado();
-        verificarTransicaoFase();
-        
-        if (tomouDano) {
-            contadorDano++;
-        if (contadorDano > 60) {
-            tomouDano = false;
-            contadorDano = 0;
-        }
-}
+        checarTeclado(); 
+        verificarTransicaoFase(); 
+        verificarColisao(); 
     }
     
-    private void verificarTransicaoFase() {
+    private void verificarColisao(){ //Implementa sistema de vidas monitorando colisões de Teseu com o Minotauro
+        if (isTouching(Minotauro.class)){
+                vidas--;
+            try {
+            Greenfoot.playSound("Damage.wav");
+            } catch(Exception e) {}
+
+            if (vidas <= 0) {
+                this.morrer();  
+            } else {
+                voltarInicio(); 
+                mostrarMensagem("Vidas restantes: " + vidas);
+                }
+        };
+    
+    };   
+        
+    private void verificarTransicaoFase() { // Monitora a transicão de fases
         World mundo = getWorld();
         
-        if (mundo instanceof LabirintoFase1) {
+        if (mundo instanceof Labirinto1) {
             if (getX() == 19 && getY() == 13) {  
-                LabirintoFase1 fase1 = (LabirintoFase1) mundo;
+                Labirinto1 fase1 = (Labirinto1) mundo;
                 fase1.avancarParaFase2(this);
             }
         }
         
-        else if (mundo instanceof LabirintoFase2) {
-            if (getX() == 24 && getY() == 19) {  
-                LabirintoFase2 fase2 = (LabirintoFase2) mundo;
-                //fase2.avancarParaFase3(this);
+        else if (mundo instanceof Labirinto2) {
+            if (getX() == 24 && getY() == 18) {  
+                Labirinto2 fase2 = (Labirinto2) mundo;
+                fase2.avancarParaFase3(this);
+            }
+        }
+        else if (mundo instanceof Labirinto3){
+            if(getX() == 24 && getY() == 18){
+                Labirinto3 fase3 = (Labirinto3) mundo;
+                fase3.vencerJogo(this);
             }
         }
     }
     
-    private void checarTeclado() {
+    private void checarTeclado() { // Verifica o teclado para movimentar Teseu
         String tecla = Greenfoot.getKey();
         
         if (tecla != null) {
@@ -73,32 +86,24 @@ public class Teseu extends Personagem
             if (isTouching(Parede.class)) {
                 setLocation(antigoX, antigoY);
             }
-            
-            // Se encontrar o Minotauro, perde uma vida
-           if (isTouching(Minotauro.class) && !tomouDano) {
-                vidas--;
-                tomouDano = true;
-                
-                if (vidas <= 0) {
-                    morrer();  // Volta para tela inicial
-                } else {
-                    voltarInicio();
-                    mostrarMensagem("Vidas restantes: " + vidas);
-                }
-            }
+           
         }
     }
     
-    private void voltarInicio() {
-        if (getWorld() instanceof LabirintoFase1) {
-            setLocation(1, 1);
-        } else if (getWorld() instanceof LabirintoFase2) {
-            setLocation(1, 1);
-        }
+    private void voltarInicio() { //Posiciona o jogador na coordenada inicial dos labirintos (1,1)
+        setLocation(1, 1);
     }
     
-    @Override
-    protected void morrer() {
+    public static void resetarVidas() { //Reseta as vidas do jogador para 3
+        vidas = 3;
+    }
+    
+    private void morrer() { //Oraniza a lógica para quando o jogador morrer no jogo: informa na tela, reseta as vidas, retoma pra tela incial
+        World mundoAtual = getWorld();
+        
+        if (mundoAtual instanceof FasesBase) {
+            ((FasesBase) mundoAtual).pararMusica();
+        }
         
         try {
             Greenfoot.playSound("GameOver.wav");
@@ -106,13 +111,8 @@ public class Teseu extends Personagem
 
         mostrarMensagem("GAME OVER!");
         Greenfoot.delay(80);
+        resetarVidas();
         Greenfoot.setWorld(new TelaInicial());
-        
-        
-    }
-    
-    public int getVidas() {
-        return vidas;
     }
     
     private void mostrarMensagem(String texto) {

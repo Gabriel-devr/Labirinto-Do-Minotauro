@@ -1,6 +1,5 @@
 #BlueJ class context
 comment0.target=Label
-comment0.text=\n\ Classe\ simples\ para\ mostrar\ textos\ na\ tela\n
 comment1.params=texto\ tamanho
 comment1.target=Label(java.lang.String,\ int)
 comment2.params=
